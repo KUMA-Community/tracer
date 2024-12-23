@@ -63,5 +63,11 @@ Tracer.py мимикрирует под механизм обогащения а
 
 ![image](https://github.com/borross/tracer/assets/39199196/783bd530-956f-4634-8a4b-2af4dd41a126)
 
-Пример очистки раз в 2 дня в CRON:
-`0 0 */2 * * >/var/log/Tracer.log; >/opt/kaspersky/kuma/collector/<ВАШ_ID>/log/collector`
+Пример очистки раз в сутки в CRON:
+```bash
+sudo tee -a /etc/cron.daily/tracer_log_clear > /dev/null <<EOF
+#!/bin/bash
+sudo  -- sh -c '>/var/log/Tracer.log; >/opt/kaspersky/kuma/collector/<ВАШ_ID>/log/collector'
+EOF
+sudo chmod +x /etc/cron.daily/tracer_log_clear
+```
